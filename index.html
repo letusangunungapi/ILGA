@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="shortcut icon" href="assets/images/volcano.png">
+    <title>Informasi Letusan Gunung Api</title>
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: "Poppins", sans-serif
+        }
+
+        body {
+            font-size: 16px;
+        }
+
+        .w3-half img {
+            margin-bottom: -6px;
+            margin-top: 16px;
+            opacity: 0.8;
+            cursor: pointer
+        }
+
+        .w3-half img:hover {
+            opacity: 1
+        }
+
+        #map {
+            position: absolute;
+            width: 72%;
+            top: 410px;
+            bottom: 100px;
+            right: 0px;
+            left: 356px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <nav class="w3-sidebar w3-khaki w3-collapse w3-top w3-large w3-padding"
+        style="z-index:3; width:300px; font-weight:bold;" id="mySidebar"><br><br><br>
+
+        <div class="w3-container">
+            <img src="assets/images/icon.png" width="100%">
+        </div><br>
+        <div class="w3-bar-block" style="text-align: center;">
+            <a href="#" onclick="w3_close()" class="w3-bar-item w3-button" style="color: #9b870c">Home</a>
+            <a href="#peta" onclick="w3_close()" class="w3-bar-item w3-button" style="color: #9b870c">Peta</a>
+            <a href="#penjelasan" onclick="w3_close()" class="w3-bar-item w3-button"
+                style="color: #9b870c">Penjelasan</a>
+            <a href="#jeniserupsi" onclick="w3_close()" class="w3-bar-item w3-button" style="color: #9b870c">Jenis
+            </a>
+            <a href="#tingkatisyarat" onclick="w3_close()" class="w3-bar-item w3-button" style="color: #9b870c">Tingkat
+                Isyarat</a>
+            <a href="#bahayaerupsi" onclick="w3_close()" class="w3-bar-item w3-button" style="color: #9b870c">Bahaya
+            </a>
+            <a href="#mitigasibencana" onclick="w3_close()" class="w3-bar-item w3-button"
+                style="color: #9b870c">Mitigasi</a>
+            <a href="#referensi" onclick="w3_close()" class="w3-bar-item w3-button"
+                style="color: #9b870c">Referensi & Anggota</a>
+        </div>
+    </nav>
+
+    <!-- Top menu on small screens -->
+    <header class="w3-container w3-top w3-hide-large w3-khaki w3-xlarge w3-padding">
+        <a href="javascript:void(0)" class="w3-button w3-khaki w3-margin-right" onclick="w3_open()">☰</a>
+        <span style="color: #9b870c">Informasi Letusan Gunung Api</span>
+    </header>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+        id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+        <!-- Header -->
+        <div class="w3-container" style="margin-top:80px" id="home">
+            <h1 class="w3-jumbo" style="color: #858178"><b>Informasi Letusan Gunung Api</b></h1>
+        </div>
+
+        <!-- Peta -->
+        <div class="w3-container" style="margin-top:20px" id="peta">
+            <h1 class="w3-xxxlarge" style="color: #d2b55b"><b>Gunung Berapi di Indonesia.</b></h1>
+            <hr style="width:50px;border:5px solid palegoldenrod" class="w3-round">
+            <p style="color: gray; text-align: justify;">Berikut beberapa gunung berapi yang ada di Indonesia. Pulau Kalimantan dan Papua memiliki pergunungan namun diantara gunung-gunung yang ada di kedua pulau tersebut, tidak terdapat gunung yang berapi.
+            </p>
+            <div id="map">
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+                    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+                    crossorigin="" />
+                <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                    crossorigin=""></script>
+
+                <script src="https://unpkg.com/esri-leaflet@3.0.2/dist/esri-leaflet.js"
+                    integrity="sha512-myckXhaJsP7Q7MZva03Tfme/MSF5a6HC2xryjAM4FxPLHGqlh5VALCbywHnzs2uPoF/4G/QVXyYDDSkp5nPfig=="
+                    crossorigin=""></script>
+                <script>
+                    var map = L.map('map').setView([-1, 117], 4);
+
+                    L.esri.basemapLayer('Topographic').addTo(map);
+                    var marker = L.marker([-0.74,124.42],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Ambang")
+                        .openPopup();
+                    var marker = L.marker([-6.102,105.423],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Anak Krakatau")
+                        .openPopup();
+                    var marker = L.marker([-7.725,112.58],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Arjuno Welirang")
+                        .openPopup();
+                    var marker = L.marker([-8.62,120.52],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Anak Ranakah")
+                        .openPopup();
+                    var marker = L.marker([3.67,125.5],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Awu")
+                        .openPopup();
+                    var marker = L.marker([-4.525,129.871],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Banda")
+                        .openPopup();
+                    var marker = L.marker([-8.242,115.375],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Batur")
+                        .openPopup();
+                    var marker = L.marker([-7.792,123.579],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Batutara")
+                        .openPopup();
+                    var marker = L.marker([-7.942,112.95],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Bromo")
+                        .openPopup();
+                    var marker = L.marker([-4.016886,103.122354],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Dempo")
+                        .openPopup();
+                    var marker = L.marker([-7.215227,109.90231],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Dieng")
+                        .openPopup();
+                    var marker = L.marker([1.68,127.88],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Dukono")
+                        .openPopup();
+                    var marker = L.marker([-8.82,121.18],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Ebulobo")
+                        .openPopup();
+                    var marker = L.marker([-8.67,122.45],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Egon")
+                        .openPopup();
+                    var marker = L.marker([-7.25,108.058],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Galunggung")
+                        .openPopup();
+                    var marker = L.marker([0.8,127.325],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Gamalama")
+                        .openPopup();
+                    var marker = L.marker([-3.516028,102.626626],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Kaba")
+                        .openPopup();
+                    var marker = L.marker([2.78,125.4],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Karangetang")
+                        .openPopup();
+                    var marker = L.marker([-1.697748,101.265938],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Kerinci")
+                        .openPopup();
+                    var marker = L.marker([1.358,124.858],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Mahawu")
+                        .openPopup();
+                    var marker = L.marker([-0.389799,100.463681],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Marapi")
+                        .openPopup();
+                    var marker = L.marker([-7.542,110.442],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Merapi")
+                        .openPopup();
+                    var marker = L.marker([-7.32,107.73],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Papandayan")
+                        .openPopup();
+                    var marker = L.marker([4.914695,96.328872],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Peuet Sague")
+                        .openPopup();
+                    var marker = L.marker([-6.72,106.73],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Salak")
+                        .openPopup();
+                    var marker = L.marker([-8.108,112.92],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Semeru")
+                        .openPopup();
+                    var marker = L.marker([0.682753,99.539773],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Sorikmarapi")
+                        .openPopup();
+                    var marker = L.marker([-0.978,100.679],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Talang")
+                        .openPopup();
+                    var marker = L.marker([-0.431649,100.318796],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Tandikat")
+                        .openPopup();
+                    var marker = L.marker([-6.77,107.6],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Tangkuban")
+                        .openPopup();
+                    var marker = L.marker([-7.125,128.675],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Wurlali")
+                        .openPopup();
+                    var marker = L.marker([3.17,98.392],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Sinabung")
+                        .openPopup();
+                    var marker = L.marker([-8.342, 115.508],
+                    )
+                        .addTo(map)
+                        .bindPopup("Gunung Agung")
+                        .openPopup();
+                </script>
+            </div>
+        </div>
+
+        <!-- Penjelasan -->
+        <div class="w3-container" style="margin-top:340px" id="penjelasan">
+            <h1 class="w3-xxxlarge" style="color: #d2b55b"><b>Penjelasan.</b></h1>
+            <hr style="width:50px;border:5px solid palegoldenrod" class="w3-round">
+            <h4 style="color:#d2b55b"><b>Apa Itu Letusan Gunung Api?</b></h4>
+            <div class="w3-container">
+                <img src="assets/images/layer.png" width="30%">
+            </div><br>   
+            <p style="color: gray; text-align: justify;">Sebuah proses keluarnya magma dari ruang magma dalam perut
+                gunung berapi yang diakibatkan aktivitas magma dan pergerakan lempeng tektonik.
+                Produknya secara umum adalah gas, magma dan piroklastik. Sebuah gunung api dianggap aktif jika periode
+                yang memisahkan kita dari letusan terakhir yang diketahui kurang dari rata-rata periode antara erupsi
+                masa lalu yang berbeda.
+            </p>
+        </div>
+
+        <!-- Jenis Erupsi -->
+        <div class="w3-container" id="jeniserupsi" style="margin-top:20px">
+            <h1 class="w3-xxxlarge" style="color: #d2b55b"><b>Jenis Erupsi.</b></h1>
+            <hr style="width:50px;border:5px solid palegoldenrod" class="w3-round">
+            <div class="w3-row-padding w3-grayscale">
+                <div class="w3-col m4 w3-margin-bottom">
+                    <div class="w3-light-grey">
+                        <div class="w3-container">
+                            <h3 style="color: #c49102"><b>Erupsi Freatik</b></h3>
+                            <p class="w3-opacity" style="text-align: justify;"><b>Ketika magma segar mulai naik dari
+                                    dapur
+                                    magma ke tubuh gunung.</b></p>
+                            <p style="text-align: justify; color: darkkhaki">Pada fase ini magma berinteraksi dengan air
+                                bawah tanah dan
+                                menyebabkan penguapan. Ketika intensitas uap makin tinggi dan memiliki tekanan yang
+                                cukup tinggi, uap mampu membobol bebatuan pembekuan magma tua yang menyumbat kawah. Oleh
+                                karena itu, material vulkanik yang disemburkan oleh erupsi freatik lebih
+                                didominasi uap air bercampur gas-gas vulkanik lainnya. Material vulkaniknya memiliki
+                                suhu kurang dari 200º C dan saat tiba di kaki gunung sudah setara suhu lingkungan.
+                                Erupsi freatik sama sekali tidak memuntahkan magma segar. Intensitas erupsinya juga
+                                umumnya kecil.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-col m4 w3-margin-bottom">
+                    <div class="w3-light-grey">
+                        <div class="w3-container">
+                            <h3 style="color: #c49102"><b>Erupsi Freatomagmatik</b></h3>
+                            <p class="w3-opacity" style="text-align: justify;"><b>Biasa terjadi setelah erupsi freatik
+                                    berlalu.</b></p>
+                            <p style="text-align: justify; color: darkkhaki">Letusan ini terjadi ketika magma segar naik
+                                ke tubuh gunung namun belum mencapai lubang letusan. Magma mulai bersentuhan langsung
+                                dengan air bawah tanah. Persentuhan dengan air yang lebih dingin membuat permukaan magma
+                                segar sontak mendingin cepat, membentuk butiran-butiran pasir hingga kerikil dengan
+                                komposisi khas. Sebaliknya air bawah tanah langsung menguap dengan frekuensi dan
+                                intensitas yang lebih tinggi. Selain menyemburkan uap air dan gas-gas vulkanik lainnya,
+                                erupsi freatomagmatik pun menyemburkan debu, pasir hingga kerikil. Namun kali ini
+                                mayoritas berasal dari magma segar yang membeku cepat. Intensitas erupsinya akan lebih
+                                besar dari erupsi freatik dan material vulkanik yang dimuntahkannya pun lebih panas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-col m4 w3-margin-bottom">
+                    <div class="w3-light-grey">
+                        <div class="w3-container">
+                            <h3 style="color: #c49102"><b>Erupsi Magmatik</b></h3>
+                            <p class="w3-opacity" style="text-align: justify;"><b>Puncak erupsi, magma segar sudah
+                                    keluar dari lubang letusan.</b></p>
+                            <p style="text-align: justify; color: darkkhaki">Erupsi magmatik secara umum terbagi menjadi
+                                dua: eksplosif (ledakan) dan efusif (leleran). Erupsi magmatik eksplosif umumnya
+                                melibatkan magma segar yang bersifat asam karena banyak mengandung silikat (SiO2).
+                                Sementara pada erupsi magmatik yang efusif, magma segar yang keluar lebih bersifat basa
+                                (basaltik). Magmanya lebih encer dan kurang mengandung gas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tingkat Isyarat -->
+        <div class="w3-container" style="margin-top:20px" id="tingkatisyarat">
+            <h1 class="w3-xxxlarge" style="color: #d2b55b"><b>Tingkat Isyarat Bahaya.</b></h1>
+            <hr style="width:50px;border:5px solid palegoldenrod" class="w3-round">
+            <div class="w3-container">
+                <img src="assets/images/tingkat.jpeg" width="40%">
+            </div><br>            
+            <h4 style="color:#d2b55b"><b>Awas</b></h4>
+            <p style="color: gray; text-align: justify;">Letusan utama akan segera terjadi – daerah yang terancam harus
+                segera dikosongkan.
+            <h4 style="color:#d2b55b"><b>Siaga</b></h4>
+            <p style="color: gray; text-align: justify;">Letusan dapat terjadi dalam 2 minggu – sarana darurat
+                disiapkan.
+            <h4 style="color:#d2b55b"><b>Waspada</b></h4>
+            <p style="color: gray; text-align: justify;">Aktivitas magma dan seismik – penyuluhan ke masyarakat.
+            <h4 style="color:#d2b55b"><b>Normal</b></h4>
+            <p style="color: gray; text-align: justify;">Tidak ada aktivitas magma – pengamatan.
+            </p>
+        </div>
+
+        <!-- Bahaya Erupsi -->
+        <div class="w3-container" style="margin-top:20px" id="bahayaerupsi">
+            <h1 class="w3-xxxlarge" style="color: #d2b55b"><b>Bahaya Erupsi Gunung Berapi.</b></h1>
+            <hr style="width:50px;border:5px solid palegoldenrod" class="w3-round">
+            <div class="w3-container">
+                <img src="assets/images/bahaya.png" width="35%">
+            </div><br>   
+            <h4 style="color:#d2b55b"><b>Awan Panas</b></h4>
+            <p style="color: gray; text-align: justify;">Aliran material vulkanik panas yang terdiri atas batuan berat,
+                ringan (berongga) lava masif dan butiran klastik yang pergerakannya dipengaruhi gravitasi dan cenderung
+                mengalir melalui lembah. Bahaya ini merupakan campuran material erupsi antara gas dan bebatuan (segala
+                ukuran) yang terdorong ke bawah akibat densitas tinggi. Suhu material bisa mencapai 300-700 derajat
+                celcius, kecepatan awan panas lebih dari 70 km/jam.
+            <h4 style="color:#d2b55b"><b>Aliran Lava</b></h4>
+            <p style="color: gray; text-align: justify;">Magma yang meleleh ke permukaan bumi melalui rekahan, suhunya
+                >10.000 derajat celcius dan dapat merusak segala bentuk infrastruktur.
+            <h4 style="color:#d2b55b"><b>Gas Beracun</b></h4>
+            <p style="color: gray; text-align: justify;">Gas vulkanik yang dapat mematikan seketika apabila terhirup
+                dalam tubuh. Gas tersebut antara lain CO2, SO2, Rn, H2S, HCI, HF dan H2SO4. Gas tersebut biasanya tidak
+                berwarna dan tidak berbau.
+            <h4 style="color:#d2b55b"><b>Lontaran Material (Pijar)</b></h4>
+            <p style="color: gray; text-align: justify;">Lontaran material terjadi ketika letusan magmatik berlangsung.
+                Suhu mencapai 200 derajat celcius, diameter lebih dari 10cm dengan daya lontar ratusan kilometer.
+            </p>
+            <h4 style="color:#d2b55b"><b>Hujan Abu</b></h4>
+            <p style="color: gray; text-align: justify;">Material abu tampak halus dan bergerak sesuai arah angin.
+            </p>
+            <h4 style="color:#d2b55b"><b>Lahar Letusan</b></h4>
+            <p style="color: gray; text-align: justify;">Terjadi pada gunung berapi yang mempunyai danau kawah, terjadi
+                bersamaan saat letusan. Air bercampur material lepas gunung berapi mengalir dan berbentuk banjir lahar.
+            </p>
+        </div>
+
+        <!-- Mitigasi Bencana Gunung Meletus -->
+        <div class="w3-container" style="margin-top:20px" id="mitigasibencana">
+            <h1 class="w3-xxxlarge" style="color: #d2b55b"><b>Mitigasi Bencana Gunung Meletus.</b></h1>
+            <hr style="width:50px;border:5px solid palegoldenrod" class="w3-round">
+        </div>
+
+        <div class="w3-row-padding">
+            <div class="w3-third w3-margin-bottom">
+                <ul class="w3-ul w3-light-grey w3-center">
+                    <li class="w3-opacity w3-khaki w3-xlarge w3-padding-32">Pra-Bencana</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Memperhatikan arahan Pusat
+                        Vulkanologi dan Mitigasi Bencana Geologi (PVMBG) terkait dengan perkembangan aktivitas
+                        gunungapi.</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Persiapkan masker dan
+                        kacamata pelindung untuk mengantisipasi debu vulkanik.</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Mengetahui jalur evakuasi
+                        dan shelter yang telah disiapkan oleh pihak berwenang.</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Mempersiapkan skenario
+                        evakuasi lain apabila dampak letusan meluas di luar prediksi ahli.</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Persiapkan dukungan
+                        logistik seperti makanan siap saji dan minuman, lampu senter dan baterai cadangan, uang tunai
+                        secukupnya, dan obat-obatan khusus sesuai pemakai.</li>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w3-third">
+                <ul class="w3-ul w3-light-grey w3-center">
+                    <li class="w3-opacity w3-khaki w3-xlarge w3-padding-32">Saat Bencana</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Pastikan anda sudah berada
+                        di shelter atau tempat lain yang aman dari dampak letusan.</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Gunakan masker dan kacamata
+                        pelindung.</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Selalu memperhatikan arahan
+                        dari pihak berwenang selama berada di shelter.</li>
+                </ul>
+            </div>
+
+            <div class="w3-third">
+                <ul class="w3-ul w3-light-grey w3-center">
+                    <li class="w3-opacity w3-khaki w3-xlarge w3-padding-32">Pasca-Bencana</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Apabila Anda dan keluarga
+                        harus tinggal lebih lama di shelter, pastikan kebutuhan dasar terpenuhi dan pendampingan khusus
+                        bagi anak-anak dan remaja diberikan. Dukungan orangtua yang bekerjasama dengan organisasi
+                        kemanusiaan dalam pendampingan anak-anak dan remaja sangat penting untuk mengurangi stres atau
+                        ketertekanan selama di shelter.</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Tetap gunakan master dan
+                        kacamata pelindung ketika berada di wilayah yang terdampak abu vulkanik.</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Memperhatikan perkembangan
+                        informasi dari pihak berwenang melalui radio atau pengumuman dari pihak berwenang.</li>
+                    <li class="w3-padding-16" style="text-align: justify; color: darkgray;">Waspada terhadap
+                        kemungkinan bahaya kedua atau secondary hazard berupa banjir lahar dingin. Bencana ini dipicu
+                        oleh curah hujan tinggi dan menghanyutkan material vulkanik maupun reruntuhan kayu atau apapun
+                        sepanjang sungai dari hilir ke hulu. Perhatikan bentangan kiri dan kanan dari titik sungai
+                        mengantisipasi luapan banjir lahar dingin.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Referensi -->
+        <div class="w3-container" style="margin-top:20px" id="referensi">
+            <h1 class="w3-xxxlarge" style="color: #d2b55b"><b>Referensi.</b></h1>
+            <hr style="width:50px;border:5px solid palegoldenrod" class="w3-round">
+            <p style="color: gray; text-align: justify;">https://bpbd.ntbprov.go.id/?q=content/erupsi-gunung-api
+            </p>           
+            <p style="color: gray; text-align: justify;">https://vsi.esdm.go.id/
+            </p>
+            <p style="color: gray; text-align: justify;">https://magma.vsi.esdm.go.id/
+            </p>
+            <p style="color: gray; text-align: justify;">http://bpbd.jogjaprov.go.id/tips-bencana-letusan-gunung-api
+            </p>
+            <p style="color: gray; text-align: justify;">https://bpbd.ntbprov.go.id/?q=content/erupsi-gunung-api
+            </p>
+            <p style="color: gray; text-align: justify;">https://www.merdeka.com/jateng/5-langkah-mitigasi-bencana-gunung-meletus-lakukan-ini-saat-erupsi-merapi.html?page=2
+            </p>
+        </div>
+
+        <!-- Anggota Kelompok -->
+        <div class="w3-container" style="margin-top:20px" id="kelompok">
+            <h1 class="w3-xxxlarge" style="color: #d2b55b"><b>Anggota Kelompok.</b></h1>
+            <hr style="width:50px;border:5px solid palegoldenrod" class="w3-round">
+            <p style="color: gray; text-align: justify;">Alexandria Dwiartha - 1806198244
+            </p>           
+            <p style="color: gray; text-align: justify;">Kevin Fernando U - 1806187272
+            </p>
+            <p style="color: gray; text-align: justify;">Muhammad Daffa Shidqi - 1806187354
+            </p>
+            <p style="color: gray; text-align: justify;">Rafi Alfayadh - 1806187266
+            </p>
+        </div>
+        <!-- W3.CSS Container -->
+        <div class="w3-container w3-padding-16">
+            <p class="w3-right" style="color:gray">Kelompok 9 | Geologi Kebencanaan | 2021</p>
+        </div>
+
+        <script>
+            // Script to open and close sidebar
+            function w3_open() {
+                document.getElementById("mySidebar").style.display = "block";
+                document.getElementById("myOverlay").style.display = "block";
+            }
+
+            function w3_close() {
+                document.getElementById("mySidebar").style.display = "none";
+                document.getElementById("myOverlay").style.display = "none";
+            }
+
+            // Modal Image Gallery
+            function onClick(element) {
+                document.getElementById("img01").src = element.src;
+                document.getElementById("modal01").style.display = "block";
+                var captionText = document.getElementById("caption");
+                captionText.innerHTML = element.alt;
+            }
+        </script>
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+</body>
+
+</html>
